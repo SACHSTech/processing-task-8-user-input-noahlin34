@@ -3,17 +3,22 @@ import processing.core.PImage;
 
 public class Sketch extends PApplet {
 	
+
+  //declaring image variables 
   PImage imgBackground;
   PImage imgCharacter;
 
+  //character position varaibles
   float fltCharacterPosX = 100;
   float fltCharacterPosY = 100;
 
+  //boolean variables to control input
   boolean boolUpPressed = false;
   boolean boolDownPressed = false;
   boolean boolRightPressed = false;
   boolean boolLeftPressed = false;
 
+  //int to keep track of background
   int intBackground = 0;
 
 	
@@ -32,6 +37,7 @@ public class Sketch extends PApplet {
   public void setup() {
     background(210, 255, 173);
 
+    //loading images
     imgBackground = loadImage("cloudsbackground.jpg");
     imgCharacter = loadImage("character.png");
 
@@ -44,12 +50,15 @@ public class Sketch extends PApplet {
     
 
     image(imgBackground, 0, 0);
+
+    //changes the background if the a key is pressed 
     if(keyPressed) {
       if(key == 'a' || key == 'A') {
         background(123123);
       }
     }
     
+    //changes the character position based on input detectoin booleans
     if(boolUpPressed) {
       fltCharacterPosY = fltCharacterPosY - 2;
     }
@@ -63,7 +72,7 @@ public class Sketch extends PApplet {
       fltCharacterPosX = fltCharacterPosX - 2;
     }
 
-    
+    //changes the character size when holding down the mouse
     if(mousePressed) {
       imgCharacter.resize(100, 100);
     }else {
@@ -72,19 +81,18 @@ public class Sketch extends PApplet {
     image(imgCharacter, fltCharacterPosX, fltCharacterPosY);
 
 
+    //blacks out the window if the mouse gets too close to the edges
     if(mouseX >= width - 5 || mouseX <= 5) {
       background(341);
     }
     if(mouseY >= height - 5 || mouseY <= 5) {
       background(341);
     }
-
-
-   
   }
 
  
 
+  //changes the respective booleans if the arrow keys are pressed
   public void keyPressed() {
     if(keyCode == UP) {
       boolUpPressed = true;
@@ -100,6 +108,7 @@ public class Sketch extends PApplet {
     }
   }
 
+  //changes the respective booleans back when the arrow keys are released 
   public void keyReleased() {
     if(keyCode == UP) {
       boolUpPressed = false;
@@ -115,7 +124,7 @@ public class Sketch extends PApplet {
     }
   }
 
-
+  //mouse input for changing the background
   public void mousePressed() {
     if(intBackground == 0) {
       imgBackground = loadImage("background2.jpg");
@@ -130,6 +139,4 @@ public class Sketch extends PApplet {
       intBackground = 0;
     }
   }
-  
-  // define other methods down here.
 }
